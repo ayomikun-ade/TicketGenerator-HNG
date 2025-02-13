@@ -1,13 +1,24 @@
 import { useState } from "react";
 import Header from "../components/Header";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 const SelectTicket = () => {
   const [ticketType, setTicketType] = useState("Free");
+  const [numTickets, setNumTickets] = useState(1);
+
+  const navigate = useNavigate();
 
   const handleTicketTypeChange = (type) => {
     setTicketType(type);
   };
+
+  const handleNextClick = () => {
+    localStorage.setItem("ticketType", ticketType);
+    localStorage.setItem("numTickets", numTickets);
+    console.log(ticketType, numTickets);
+    navigate("/details");
+  };
+
   return (
     <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
@@ -99,6 +110,8 @@ const SelectTicket = () => {
             </p>
             <select
               name="ticket-no"
+              value={numTickets}
+              onChange={(e) => setNumTickets(e.target.value)}
               className="p-3 w-full rounded-xl border-[1px] md:bg-[#041e23] bg-[#08252B] appearance-none border-[#07373f] outline-none"
             >
               <option value="1" className="bg-transparent">
@@ -113,12 +126,12 @@ const SelectTicket = () => {
             <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">
               Cancel
             </button>
-            <Link
-              to="/details"
+            <button
+              onClick={handleNextClick}
               className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
             >
               Next
-            </Link>
+            </button>
           </div>
         </section>
       </div>
