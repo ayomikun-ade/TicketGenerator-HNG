@@ -108,19 +108,35 @@ const SelectTicket = () => {
             <p className="mb-2 text-neutral-50 leading-6 font-step">
               Number of Tickets
             </p>
-            <select
-              name="ticket-no"
-              value={numTickets}
-              onChange={(e) => setNumTickets(e.target.value)}
-              className="p-3 w-full rounded-xl border-[1px] md:bg-[#041e23] bg-[#08252B] appearance-none border-[#07373f] outline-none"
-            >
-              <option value="1" className="bg-transparent">
-                1
-              </option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
+            <div className="relative font-step text-base">
+              <select
+                name="ticket-no"
+                value={numTickets}
+                onChange={(e) => setNumTickets(e.target.value)}
+                className="custom-arrow p-3 w-full rounded-xl border-[1px] md:bg-[#041e23] bg-[#08252B] appearance-none border-[#07373f] outline-none"
+              >
+                <option value="1" className="bg-transparent">
+                  1
+                </option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M16.293 8.29309L12 12.5861L7.70697 8.29309L6.29297 9.70709L12 15.4141L17.707 9.70709L16.293 8.29309Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
             <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">

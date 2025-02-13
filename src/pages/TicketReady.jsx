@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
+import html2canvas from "html2canvas";
 
 const TicketReady = () => {
   const [name, setName] = useState("");
@@ -35,6 +36,16 @@ const TicketReady = () => {
     }
   }, []);
 
+  const handleDownloadClick = () => {
+    const ticketElement = document.getElementById("ticket");
+    html2canvas(ticketElement, { backgroundColor: null }).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "ticket.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  };
+
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
@@ -57,7 +68,10 @@ const TicketReady = () => {
             <span className="font-bold">download</span>
           </p>
         </section>
-        <section className="p-6 w-[300px] h-[600px] flex flex-col justify-between items-center bg-[url('/src/assets/bg.png')]">
+        <section
+          id="ticket"
+          className="p-6 w-[300px] h-[600px] flex flex-col justify-between items-center bg-[url('/src/assets/bg.png')]"
+        >
           <div className="w-[260px] h-[446px] p-[14px] flex flex-col items-center gap-5 rounded-2xl border border-[#24a0b5] bg-[#031E211A] backdrop-blur-[2px] ">
             <div className="text-center w-[175px]">
               <h2 className="font-rage text-[34px] leading-[34px] ">
@@ -126,7 +140,10 @@ const TicketReady = () => {
           >
             Book Another Ticket
           </Link>
-          <button className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent">
+          <button
+            onClick={handleDownloadClick}
+            className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+          >
             Download Ticket
           </button>
         </section>

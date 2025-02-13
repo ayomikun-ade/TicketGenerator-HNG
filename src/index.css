@@ -10,6 +10,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-arrow::-ms-expand {
+  display: none;
+}
+
+.custom-arrow {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
