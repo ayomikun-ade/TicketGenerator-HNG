@@ -97,7 +97,7 @@ const TicketReady = () => {
                   <span className="leading-[15px] opacity-[0.33]">
                     Enter your email *
                   </span>{" "}
-                  <span className="text-xs text-opacity-100 font-bold leading-[18px]">
+                  <span className="text-xs text-opacity-100 font-bold leading-[18px] overflow-hidden">
                     {email}
                   </span>
                 </p>
@@ -128,7 +128,7 @@ const TicketReady = () => {
             </div>
           </div>
 
-          <div>
+          <div className="w-[236px] h-[68px]">
             <img src="/bar-code.png" alt="" />
           </div>
         </section>

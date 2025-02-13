@@ -8,18 +8,28 @@ const attendeeSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   specialRequest: z.string().optional(),
+  profilePictureUrl: z.string().optional(),
 });
 
 const AttendeeDetails = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [specialRequest, setSpecialRequest] = useState("");
+  const [profilePictureUrl, setProfilePictureUrl] = useState("");
+  const [isDragging, setIsDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSaveDetails = (e) => {
     e.preventDefault();
-    const result = attendeeSchema.safeParse({ name, email, specialRequest });
+    const result = attendeeSchema.safeParse({
+      name,
+      email,
+      specialRequest,
+      profilePictureUrl,
+    });
 
     if (!result.success) {
       result.error.issues.forEach((issue) => {
@@ -28,12 +38,11 @@ const AttendeeDetails = () => {
       return;
     }
 
-    // Save details to local storage
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("specialRequest", specialRequest);
+    localStorage.setItem("profilePictureUrl", profilePictureUrl);
 
-    // Proceed to next step or show a success message
     toast.success("Details saved successfully!", {
       autoClose: 2000,
       theme: "dark",
@@ -41,6 +50,55 @@ const AttendeeDetails = () => {
     setInterval(() => {
       navigate("/ticket");
     }, [2000]);
+  };
+
+  const handleImageUpload = async (file) => {
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ticket-gen");
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dk4gmufzn/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+      if (data.secure_url) {
+        setProfilePictureUrl(data.secure_url);
+
+        toast.success("Image uploaded successfully!", { autoClose: 2000 });
+        setUploading(false);
+      } else {
+        toast.error("Image upload failed.", { autoClose: 2500 });
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Error uploading image.", { autoClose: 2500 });
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleImageUpload(files[0]); // Upload the first file
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
   };
 
   return (
@@ -76,11 +134,67 @@ const AttendeeDetails = () => {
               Upload Profile Photo
             </p>
             <div>
-              <div className="relative h-[200px] w-full md:bg-black md:bg-opacity-20">
-                <button className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50">
+              <div
+                className={`relative h-[200px] text-center w-full md:bg-black md:bg-opacity-20 ${
+                  isDragging
+                    ? "border-dashed scale-110 border-2 border-[#24a0b5]"
+                    : ""
+                }`}
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {profilePictureUrl ? (
+                  <div
+                    className={`text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 ${
+                      profilePictureUrl ? `overflow-hidden` : `p-6`
+                    } flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50`}
+                  >
+                    <img
+                      src={profilePictureUrl}
+                      alt="Profile"
+                      className="h-full w-full object-cover rounded-xl"
+                    />
+                    {isHovered && (
+                      <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center text-white rounded-xl">
+                        <img
+                          src="/cloud-download.svg"
+                          alt=""
+                          className="mb-2"
+                        />
+                        <p>
+                          {uploading
+                            ? "Uploading..."
+                            : "Drag & drop or click to upload"}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50">
+                    <img src="/cloud-download.svg" alt="" />
+                    <p>Drag & drop or click to upload</p>
+                  </div>
+                )}
+                {/* <button
+                  className={`${
+                    selectedFile
+                      ? `bg-[url('${selectedFile}')]`
+                      : `bg-[#0e464f]`
+                  }  text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50`}
+                >
                   <img src="/cloud-download.svg" alt="" />
                   Drag & drop or click to upload
-                </button>
+                </button> */}
+                {/* {selectedFile && (
+                  <img
+                    src={selectedFile}
+                    alt="Uploaded Profile"
+                    className="absolute top-[50%] left-[50%] z-[5] transform -translate-x-[50%] -translate-y-[50%] h-[150p w-[150p h-full w-full object-cover border border-[#24a0b5]"
+                  />
+                )} */}
               </div>
             </div>
           </div>
