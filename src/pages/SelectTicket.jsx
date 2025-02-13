@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header";
+import { Link } from "react-router";
 
 const SelectTicket = () => {
   const [ticketType, setTicketType] = useState("Free");
@@ -112,9 +113,12 @@ const SelectTicket = () => {
             <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">
               Cancel
             </button>
-            <button className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent">
+            <Link
+              to="/details"
+              className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+            >
               Next
-            </button>
+            </Link>
           </div>
         </section>
       </div>
