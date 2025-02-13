@@ -1,15 +1,51 @@
 import { Link, useNavigate } from "react-router";
 import Header from "../components/Header";
+import { useState } from "react";
+import { z } from "zod";
+import { toast, ToastContainer } from "react-toastify";
+
+const attendeeSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  specialRequest: z.string().optional(),
+});
 
 const AttendeeDetails = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [specialRequest, setSpecialRequest] = useState("");
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSaveDetails = (e) => {
     e.preventDefault();
-    navigate("/ticket");
+    const result = attendeeSchema.safeParse({ name, email, specialRequest });
+
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        toast.error(issue.message, { autoClose: 2500, theme: "dark" });
+      });
+      return;
+    }
+
+    // Save details to local storage
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("specialRequest", specialRequest);
+
+    // Proceed to next step or show a success message
+    toast.success("Details saved successfully!", {
+      autoClose: 2000,
+      theme: "dark",
+    });
+    setInterval(() => {
+      navigate("/ticket");
+    }, [2000]);
   };
+
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
+      <ToastContainer />
       <Header />
       <div className="bg-[#041e23] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <section className="flex flex-col gap-3 w-full">
@@ -50,7 +86,7 @@ const AttendeeDetails = () => {
           </div>
           <hr className="bg-[#08373f] h-1 w-full border-none" />
           <form
-            onSubmit={handleSubmit}
+            // onSubmit={handleSaveDetails}
             className="w-full font-step flex flex-col gap-8"
           >
             <div className="flex flex-col">
@@ -64,6 +100,8 @@ const AttendeeDetails = () => {
                 type="text"
                 name="name"
                 id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="appearance-none outline-none h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
               />
             </div>
@@ -80,7 +118,8 @@ const AttendeeDetails = () => {
                   type="email"
                   name="email"
                   id="email"
-                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none w-full outline-none bg-transparent focus:caret-[#26899c]"
                 />
               </p>
@@ -97,6 +136,8 @@ const AttendeeDetails = () => {
                 id="special"
                 placeholder="Textarea"
                 rows={4}
+                value={specialRequest}
+                onChange={(e) => setSpecialRequest(e.target.value)}
                 className="outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
               ></textarea>
             </div>
@@ -108,7 +149,8 @@ const AttendeeDetails = () => {
                 Back
               </Link>
               <button
-                type="submit"
+                // type="submit"
+                onClick={handleSaveDetails}
                 className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
               >
                 Get My Free Ticket

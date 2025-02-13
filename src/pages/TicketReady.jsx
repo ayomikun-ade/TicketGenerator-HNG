@@ -1,7 +1,40 @@
 import { Link } from "react-router";
 import Header from "../components/Header";
+import { useEffect, useState } from "react";
 
 const TicketReady = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [specialRequest, setSpecialRequest] = useState("");
+  const [ticketType, setTicketType] = useState("");
+  const [numTickets, setNumTickets] = useState(1);
+
+  useEffect(() => {
+    const savedTicketType = localStorage.getItem("ticketType");
+    const savedNumTickets = localStorage.getItem("numTickets");
+    const savedName = localStorage.getItem("name");
+    const savedEmail = localStorage.getItem("email");
+    const savedRequest = localStorage.getItem("specialRequest");
+
+    if (savedName) {
+      setName(savedName);
+    }
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+    if (savedRequest) {
+      setSpecialRequest(savedRequest);
+    }
+
+    if (savedTicketType) {
+      setTicketType(savedTicketType);
+    }
+
+    if (savedNumTickets) {
+      setNumTickets(savedNumTickets);
+    }
+  }, []);
+
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
@@ -43,7 +76,7 @@ const TicketReady = () => {
                     Enter your name
                   </span>{" "}
                   <span className="text-xs text-opacity-100 font-bold leading-[18px]">
-                    Avi Chukwu
+                    {name}
                   </span>
                 </p>
                 <p className="pl-2 border-l border-[#12464e] flex flex-col justify-center gap-1 p-1">
@@ -51,7 +84,7 @@ const TicketReady = () => {
                     Enter your email *
                   </span>{" "}
                   <span className="text-xs text-opacity-100 font-bold leading-[18px]">
-                    user@email.com
+                    {email}
                   </span>
                 </p>
               </div>
@@ -62,7 +95,7 @@ const TicketReady = () => {
                     Ticket Type
                   </span>{" "}
                   <span className="text-xs text-opacity-100 font-bold leading-[18px]">
-                    VIP
+                    {ticketType}
                   </span>
                 </p>
                 <p className="pl-2 border-l border-[#12464e] flex flex-col justify-center gap-1 p-1">
@@ -70,16 +103,13 @@ const TicketReady = () => {
                     Ticket for:
                   </span>{" "}
                   <span className="text-xs text-opacity-100 font-bold leading-[18px]">
-                    1
+                    {numTickets}
                   </span>
                 </p>
               </div>
               <div className="col-span-2 p-2 flex flex-col gap-1">
                 <p className="opacity-[0.33]">Special Request?</p>
-                <p className="text-[10px] leading-[15px]">
-                  Nil ? Or the users sad story they write in there gets this
-                  whole space, Max of three rows
-                </p>
+                <p className="text-[10px] leading-[15px]">{specialRequest}</p>
               </div>
             </div>
           </div>
