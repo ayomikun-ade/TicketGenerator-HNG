@@ -8,7 +8,9 @@ const attendeeSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   specialRequest: z.string().optional(),
-  profilePictureUrl: z.string().optional(),
+  profilePictureUrl: z
+    .string()
+    .min(1, { message: "Profile picture is required" }),
 });
 
 const AttendeeDetails = () => {
