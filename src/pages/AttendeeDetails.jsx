@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import Header from "../components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -12,15 +12,26 @@ const attendeeSchema = z.object({
 });
 
 const AttendeeDetails = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [specialRequest, setSpecialRequest] = useState("");
-  const [profilePictureUrl, setProfilePictureUrl] = useState("");
+  const [name, setName] = useState(() => localStorage.getItem("name") || "");
+  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
+  const [specialRequest, setSpecialRequest] = useState(
+    () => localStorage.getItem("specialRequest") || ""
+  );
+  const [profilePictureUrl, setProfilePictureUrl] = useState(
+    () => localStorage.getItem("profilePictureUrl") || ""
+  );
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("specialRequest", specialRequest);
+    localStorage.setItem("profilePictureUrl", profilePictureUrl);
+  }, [name, email, specialRequest, profilePictureUrl]);
 
   const handleSaveDetails = (e) => {
     e.preventDefault();
@@ -211,23 +222,6 @@ const AttendeeDetails = () => {
                     </p>
                   </button>
                 )}
-                {/* <button
-                  className={`${
-                    selectedFile
-                      ? `bg-[url('${selectedFile}')]`
-                      : `bg-[#0e464f]`
-                  }  text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50`}
-                >
-                  <img src="/cloud-download.svg" alt="" />
-                  Drag & drop or click to upload
-                </button> */}
-                {/* {selectedFile && (
-                  <img
-                    src={selectedFile}
-                    alt="Uploaded Profile"
-                    className="absolute top-[50%] left-[50%] z-[5] transform -translate-x-[50%] -translate-y-[50%] h-[150p w-[150p h-full w-full object-cover border border-[#24a0b5]"
-                  />
-                )} */}
               </div>
             </div>
           </div>
