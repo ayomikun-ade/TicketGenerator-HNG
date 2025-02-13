@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
 import StepTwo from "../components/AttendeeDetails/StepTwo";
@@ -28,6 +28,7 @@ const AttendeeDetails = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("name", name);
@@ -119,22 +120,26 @@ const AttendeeDetails = () => {
   };
 
   const handleManualUpload = async () => {
-    try {
-      const [fileHandle] = await window.showOpenFilePicker({
-        types: [
-          {
-            description: "Images",
-            accept: { "image/*": [".png", ".jpg", ".jpeg"] },
-          },
-        ],
-        multiple: false,
-      });
+    if (window.showOpenFilePicker) {
+      try {
+        const [fileHandle] = await window.showOpenFilePicker({
+          types: [
+            {
+              description: "Images",
+              accept: { "image/*": [".png", ".jpg", ".jpeg"] },
+            },
+          ],
+          multiple: false,
+        });
 
-      const file = await fileHandle.getFile();
-      handleImageUpload(file);
-    } catch (error) {
-      toast.error("File selection cancelled", { theme: "dark" });
-      console.error(error);
+        const file = await fileHandle.getFile();
+        handleImageUpload(file);
+      } catch (error) {
+        toast.error("File selection cancelled", { theme: "dark" });
+        console.error(error);
+      }
+    } else {
+      fileInputRef.current.click();
     }
   };
 
@@ -202,6 +207,13 @@ const AttendeeDetails = () => {
                         ? "Uploading..."
                         : "Drag & drop or click to upload"}
                     </p>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={fileInputRef}
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e.target.files[0])}
+                    />
                   </button>
                 )}
               </div>

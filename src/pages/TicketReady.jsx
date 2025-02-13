@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
@@ -11,6 +11,8 @@ const TicketReady = () => {
   const [ticketType, setTicketType] = useState("Free");
   const [numTickets, setNumTickets] = useState(1);
   const [profilePictureUrl, setProfilePictureUrl] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedTicketType = localStorage.getItem("ticketType");
@@ -50,6 +52,11 @@ const TicketReady = () => {
       link.href = canvas.toDataURL("image/png");
       link.click();
     });
+  };
+
+  const handleNewTicket = () => {
+    localStorage.clear();
+    navigate("/");
   };
 
   return (
@@ -126,12 +133,12 @@ const TicketReady = () => {
         </section>
 
         <section className="flex flex-col-reverse  mt-6 md:flex-row w-full justify-between gap-6 font-main leading-6">
-          <Link
-            to="/"
+          <button
+            onClick={handleNewTicket}
             className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white"
           >
             Book Another Ticket
-          </Link>
+          </button>
           <button
             onClick={handleDownloadClick}
             className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
