@@ -6,6 +6,7 @@ export default {
       main: ['"Jeju Myeongjo"'],
       rage: ['"Road Rage"'],
       step: ["Roboto"],
+      booked: ["Alatsi"],
     },
     extend: {},
   },

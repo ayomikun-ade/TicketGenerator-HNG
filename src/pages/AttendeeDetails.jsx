@@ -1,7 +1,13 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Header from "../components/Header";
 
 const AttendeeDetails = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/ticket");
+  };
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
@@ -43,7 +49,10 @@ const AttendeeDetails = () => {
             </div>
           </div>
           <hr className="bg-[#08373f] h-1 w-full border-none" />
-          <form className="w-full font-step flex flex-col gap-8">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full font-step flex flex-col gap-8"
+          >
             <div className="flex flex-col">
               <label
                 htmlFor="name"
@@ -68,7 +77,7 @@ const AttendeeDetails = () => {
               <p className="has-[:focus]:border-[#26899c] outline-none flex items-center gap-2 h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c]">
                 <img src="/envelope.svg" alt="" />
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   required
@@ -98,7 +107,10 @@ const AttendeeDetails = () => {
               >
                 Back
               </Link>
-              <button className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent">
+              <button
+                type="submit"
+                className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+              >
                 Get My Free Ticket
               </button>
             </div>
