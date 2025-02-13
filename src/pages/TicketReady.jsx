@@ -7,8 +7,9 @@ const TicketReady = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [specialRequest, setSpecialRequest] = useState("");
-  const [ticketType, setTicketType] = useState("");
+  const [ticketType, setTicketType] = useState("Free");
   const [numTickets, setNumTickets] = useState(1);
+  const [profilePictureUrl, setProfilePictureUrl] = useState("");
 
   useEffect(() => {
     const savedTicketType = localStorage.getItem("ticketType");
@@ -16,6 +17,7 @@ const TicketReady = () => {
     const savedName = localStorage.getItem("name");
     const savedEmail = localStorage.getItem("email");
     const savedRequest = localStorage.getItem("specialRequest");
+    const savedProfilePictureUrl = localStorage.getItem("profilePictureUrl");
 
     if (savedName) {
       setName(savedName);
@@ -33,6 +35,9 @@ const TicketReady = () => {
 
     if (savedNumTickets) {
       setNumTickets(savedNumTickets);
+    }
+    if (savedProfilePictureUrl) {
+      setProfilePictureUrl(savedProfilePictureUrl);
     }
   }, []);
 
@@ -82,7 +87,10 @@ const TicketReady = () => {
                 <p>📅 March 15, 2025 | 7:00 PM</p>
               </div>
             </div>
-            <div className="w-[140px] h-[140px] rounded-xl border-4 border-[#24A0B580] bg-[url('/src/assets/profile-image.jpg')] bg-center bg-cover"></div>
+            <div
+              style={{ backgroundImage: `url(${profilePictureUrl})` }}
+              className={`w-[140px] h-[140px] rounded-xl border-4 border-[#24A0B580] bg-center bg-cover`}
+            ></div>
             <div className="w-full h-fit p-1 text-[10px] font-step rounded-lg border border-[#133d44] bg-[#08343c]">
               <div className="grid grid-cols-2 justify-between border-b border-[#12464E]">
                 <p className="flex flex-col justify-center gap-1 p-1">
