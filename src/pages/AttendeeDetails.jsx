@@ -71,14 +71,17 @@ const AttendeeDetails = () => {
       if (data.secure_url) {
         setProfilePictureUrl(data.secure_url);
 
-        toast.success("Image uploaded successfully!", { autoClose: 2000 });
+        toast.success("Image uploaded successfully!", {
+          autoClose: 2000,
+          theme: "dark",
+        });
         setUploading(false);
       } else {
-        toast.error("Image upload failed.", { autoClose: 2500 });
+        toast.error("Image upload failed.", { autoClose: 2500, theme: "dark" });
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      toast.error("Error uploading image.", { autoClose: 2500 });
+      toast.error("Error uploading image.", { autoClose: 2500, theme: "dark" });
     }
   };
 
@@ -99,6 +102,26 @@ const AttendeeDetails = () => {
 
   const handleDragLeave = () => {
     setIsDragging(false);
+  };
+
+  const handleManualUpload = async () => {
+    try {
+      const [fileHandle] = await window.showOpenFilePicker({
+        types: [
+          {
+            description: "Images",
+            accept: { "image/*": [".png", ".jpg", ".jpeg"] },
+          },
+        ],
+        multiple: false,
+      });
+
+      const file = await fileHandle.getFile();
+      handleImageUpload(file);
+    } catch (error) {
+      toast.error("File selection cancelled", { theme: "dark" });
+      console.error(error);
+    }
   };
 
   return (
@@ -158,7 +181,10 @@ const AttendeeDetails = () => {
                       className="h-full w-full object-cover rounded-xl"
                     />
                     {isHovered && (
-                      <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center text-white rounded-xl">
+                      <button
+                        onClick={handleManualUpload}
+                        className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center text-white rounded-xl"
+                      >
                         <img
                           src="/cloud-download.svg"
                           alt=""
@@ -169,14 +195,21 @@ const AttendeeDetails = () => {
                             ? "Uploading..."
                             : "Drag & drop or click to upload"}
                         </p>
-                      </div>
+                      </button>
                     )}
                   </div>
                 ) : (
-                  <div className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50">
+                  <button
+                    onClick={handleManualUpload}
+                    className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50"
+                  >
                     <img src="/cloud-download.svg" alt="" />
-                    <p>Drag & drop or click to upload</p>
-                  </div>
+                    <p>
+                      {uploading
+                        ? "Uploading..."
+                        : "Drag & drop or click to upload"}
+                    </p>
+                  </button>
                 )}
                 {/* <button
                   className={`${
