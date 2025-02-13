@@ -55,8 +55,9 @@ const TicketReady = () => {
   };
 
   const handleNewTicket = () => {
-    localStorage.clear();
-    navigate("/");
+    localStorage.clear(); // Clear all stored values
+    navigate("/", { replace: true }); // Navigate to home
+    window.location.reload();
   };
 
   return (

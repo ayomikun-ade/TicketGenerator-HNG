@@ -62,7 +62,7 @@ const AttendeeDetails = () => {
       autoClose: 2000,
       theme: "dark",
     });
-    setInterval(() => {
+    setTimeout(() => {
       navigate("/ticket");
     }, [2000]);
   };
