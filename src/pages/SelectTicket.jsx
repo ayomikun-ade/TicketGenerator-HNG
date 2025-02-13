@@ -11,7 +11,7 @@ const SelectTicket = () => {
   return (
     <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
-      <div className="md:bg-[#041e23] bg-[#08252B] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 md:mb-36 mt-36  rounded-[40px] border-[#0e464f]">
+      <div className="md:bg-[#041e23] bg-[#08252B] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 md:mb-36 mt-36  rounded-[40px] border border-[#0e464f]">
         <section className="flex flex-col gap-3 w-full">
           <div className="text-white flex flex-col md:flex-row md:items-center justify-between">
             <h3 className="text-2xl md:text-[32px] leading-normal">
@@ -25,7 +25,7 @@ const SelectTicket = () => {
             <img src="/progress1.png" alt="" />
           </div>
         </section>
-        <section className="md:bg-[#08252b] flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border-[#0e464f]">
+        <section className="md:bg-[#08252b] flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">
           <div className="flex flex-col justify-between text-center text-neutral-50 px-6 py-4 md:p-6 rounded-3xl w-full h-[243px] md:h-[200px] border-b-2 border-x-2 border-[#07373f] backdrop-blur bg-[radial-gradient(57.42%_106.59%_at_14.02%_32.06%,_rgba(36,_160,_181,_0.2)_0%,_rgba(36,_160,_181,_0)_100%)] bg-opacity-10 bg-[#0A0C11]">
             <div className="">
               <h1 className="font-rage mb-2 text-5xl md:text-[62px] leading-10 md:leading-none ">
@@ -109,7 +109,7 @@ const SelectTicket = () => {
               <option value="4">4</option>
             </select>
           </div>
-          <div className="flex flex-col md:flex-row w-full justify-between gap-6 font-main leading-6">
+          <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
             <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">
               Cancel
             </button>
