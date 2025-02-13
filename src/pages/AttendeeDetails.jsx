@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
+import StepTwo from "../components/AttendeeDetails/StepTwo";
 
 const attendeeSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -142,28 +143,7 @@ const AttendeeDetails = () => {
       <ToastContainer />
       <Header />
       <div className="bg-[#041e23] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
-        <section className="flex flex-col gap-3 w-full">
-          <div className="text-white flex items-center justify-between">
-            <h3 className="text-2xl md:text-[32px] leading-normal">
-              Attendee Details
-            </h3>
-            <p className="font-step text-neutral-50 leading-6 text-base">
-              Step 2/3
-            </p>
-          </div>
-          <div>
-            <img
-              src="/progress2.png"
-              alt="progress bar"
-              className="hidden md:block"
-            />
-            <img
-              src="/progress2-mobile.png"
-              alt="progress bar"
-              className="md:hidden"
-            />
-          </div>
-        </section>
+        <StepTwo />
         <section className="md:bg-[#08252b] w-full flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">
           <div className="bg-[#052228] w-full flex flex-col justify-between gap-8 text-neutral-50 px-6 py-6 pb-12 rounded-3xl md:w-[556px] border-[1px] border-[#07373f]">
             <p className="font-step text-base leading-6 text-neutral-50">
