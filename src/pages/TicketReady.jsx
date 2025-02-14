@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import html2canvas from "html2canvas";
 import StepThree from "../components/TicketReady/StepThree";
+import { toPng } from "html-to-image";
+import { toast } from "react-toastify";
+import autoprefixer from "autoprefixer";
 
 const TicketReady = () => {
   const [name, setName] = useState("");
@@ -47,20 +49,23 @@ const TicketReady = () => {
   const handleDownloadClick = () => {
     const ticketElement = document.getElementById("ticket");
 
-    const profileImg = new Image();
-    profileImg.crossOrigin = "anonymous";
-    profileImg.src = profilePictureUrl;
+    if (!ticketElement) return;
 
-    profileImg.onload = () => {
-      html2canvas(ticketElement, { backgroundColor: null, useCORS: true }).then(
-        (canvas) => {
-          const link = document.createElement("a");
-          link.download = "ticket.png";
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-        }
-      );
-    };
+    toPng(ticketElement, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "ticket.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((error) => {
+        toast.error("Error downloading ticket image. Try again.", {
+          autoClose: 2500,
+          theme: "dark",
+          role: "status",
+        });
+        console.error("Error generating ticket image:", error);
+      });
   };
 
   const handleNewTicket = () => {
@@ -88,10 +93,16 @@ const TicketReady = () => {
                 <p>📅 March 15, 2025 | 7:00 PM</p>
               </div>
             </div>
-            <div
+            {/* <div
               style={{ backgroundImage: `url(${profilePictureUrl})` }}
               className={`w-[140px] h-[140px] rounded-xl border-4 border-[#24A0B580] bg-center bg-cover`}
-            ></div>
+            ></div> */}
+            <img
+              src={profilePictureUrl}
+              alt="profile image"
+              crossOrigin="anonymous"
+              className="w-[140px] h-[140px] rounded-xl border-4 border-[#24A0B580] bg-center bg-cover"
+            />
             <div className="w-full h-fit p-1 text-[10px] font-step rounded-lg border border-[#133d44] bg-[#08343c]">
               <div className="grid grid-cols-2 justify-between border-b border-[#12464E]">
                 <p className="flex flex-col justify-center gap-1 p-1">
