@@ -123,7 +123,7 @@ const AttendeeDetails = () => {
 
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      handleImageUpload(files[0]); // Upload the first file
+      handleImageUpload(files[0]);
     }
   };
 
@@ -249,10 +249,7 @@ const AttendeeDetails = () => {
             </div>
           </div>
           <hr className="bg-[#08373f] h-1 w-full border-none" />
-          <form
-            // onSubmit={handleSaveDetails}
-            className="w-full font-step flex flex-col gap-8"
-          >
+          <form className="w-full font-step flex flex-col gap-8">
             <div className="flex flex-col">
               <label
                 htmlFor="name"
@@ -316,7 +313,6 @@ const AttendeeDetails = () => {
                 Back
               </Link>
               <button
-                // type="submit"
                 onClick={handleSaveDetails}
                 className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
               >

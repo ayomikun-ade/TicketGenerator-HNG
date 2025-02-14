@@ -35,8 +35,10 @@ const SelectTicket = () => {
             </h3>
             <section className="grid grid-cols-1 w-full md:grid-cols-3 p-4 gap-4 flex-wrap rounded-3xl border-[#07373f] bg-[#052228]">
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "Free" ? "bg-[#12464e]" : "bg-transparent"
+                className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
+                  ticketType === "Free"
+                    ? "bg-[#12464e] border-1"
+                    : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("Free")}
               >
@@ -49,8 +51,10 @@ const SelectTicket = () => {
                 <p className="text-[#d9d9d9] leading-5">20/52</p>
               </button>
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "VIP" ? "bg-[#12464e]" : "bg-transparent"
+                className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
+                  ticketType === "VIP"
+                    ? "bg-[#12464e] border-1"
+                    : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("VIP")}
               >
@@ -63,8 +67,10 @@ const SelectTicket = () => {
                 <p className="text-[#d9d9d9] leading-5">20/52</p>
               </button>
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "VVIP" ? "bg-[#12464e]" : "bg-transparent"
+                className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
+                  ticketType === "VVIP"
+                    ? "bg-[#12464e] border-1"
+                    : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("VVIP")}
               >
