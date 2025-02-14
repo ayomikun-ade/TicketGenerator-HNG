@@ -31,6 +31,7 @@ const Header = () => {
               toast.info("This feature isn't available yet, Stay tuned!", {
                 autoClose: 2500,
                 theme: "dark",
+                role: "status",
               })
             }
           >
@@ -45,6 +46,7 @@ const Header = () => {
             toast.info("This feature isn't available yet, Stay tuned!", {
               autoClose: 2500,
               theme: "dark",
+              role: "status",
             })
           }
           className="bg-white text-[#0A0C11] text-sm md:text-base flex gap-2 px-6 py-4 items-center justify-center rounded-xl border border-[rgb(213,234,0)] border-opacity-10"

@@ -51,7 +51,11 @@ const AttendeeDetails = () => {
 
     if (!result.success) {
       result.error.issues.forEach((issue) => {
-        toast.error(issue.message, { autoClose: 2500, theme: "dark" });
+        toast.error(issue.message, {
+          autoClose: 2500,
+          theme: "dark",
+          role: "status",
+        });
       });
       return;
     }
@@ -64,6 +68,7 @@ const AttendeeDetails = () => {
     toast.success("Details saved successfully!", {
       autoClose: 2000,
       theme: "dark",
+      role: "status",
     });
     setTimeout(() => {
       navigate("/ticket");
@@ -92,14 +97,23 @@ const AttendeeDetails = () => {
         toast.success("Image uploaded successfully!", {
           autoClose: 2000,
           theme: "dark",
+          role: "status",
         });
         setUploading(false);
       } else {
-        toast.error("Image upload failed.", { autoClose: 2500, theme: "dark" });
+        toast.error("Image upload failed.", {
+          autoClose: 2500,
+          theme: "dark",
+          role: "status",
+        });
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      toast.error("Error uploading image.", { autoClose: 2500, theme: "dark" });
+      toast.error("Error uploading image.", {
+        autoClose: 2500,
+        theme: "dark",
+        role: "status",
+      });
     }
   };
 
@@ -138,7 +152,10 @@ const AttendeeDetails = () => {
         const file = await fileHandle.getFile();
         handleImageUpload(file);
       } catch (error) {
-        toast.error("File selection cancelled", { theme: "dark" });
+        toast.error("File selection cancelled", {
+          theme: "dark",
+          role: "status",
+        });
         console.error(error);
       }
     } else {
