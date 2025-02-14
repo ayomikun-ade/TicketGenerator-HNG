@@ -180,6 +180,7 @@ const AttendeeDetails = () => {
                     />
                     {isHovered && (
                       <button
+                        disabled={uploading}
                         onClick={handleManualUpload}
                         className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-center text-white rounded-xl"
                       >
@@ -198,6 +199,7 @@ const AttendeeDetails = () => {
                   </div>
                 ) : (
                   <button
+                    disabled={uploading}
                     onClick={handleManualUpload}
                     className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50"
                   >

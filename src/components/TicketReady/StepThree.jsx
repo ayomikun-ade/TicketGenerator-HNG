@@ -11,7 +11,7 @@ const StepThree = () => {
         <hr className="bg-[#24a0b5] h-1 w-full rounded-md border-none" />
       </section>
       <section className="flex flex-col gap-3 md:gap-4">
-        <h1 className="font-booked text-2xl md:text-[32px] leading-normal text-center">
+        <h1 className="font-step md:font-booked font-bold md:font-normal md:leading-normal text-2xl md:text-[32px] leading-[33.6px] text-center">
           Your Ticket is Booked!
         </h1>
         <p className="font-step text-center">

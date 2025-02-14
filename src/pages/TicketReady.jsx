@@ -45,13 +45,30 @@ const TicketReady = () => {
   }, []);
 
   const handleDownloadClick = () => {
+    // const ticketElement = document.getElementById("ticket");
+    // html2canvas(ticketElement, { backgroundColor: null }).then((canvas) => {
+    //   const link = document.createElement("a");
+    //   link.download = "ticket.png";
+    //   link.href = canvas.toDataURL("image/png");
+    //   link.click();
+    // });
     const ticketElement = document.getElementById("ticket");
-    html2canvas(ticketElement, { backgroundColor: null }).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = "ticket.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
+
+    // Ensure the profile picture is loaded before capturing
+    const profileImg = new Image();
+    profileImg.crossOrigin = "anonymous"; // Ensures CORS compatibility
+    profileImg.src = profilePictureUrl;
+
+    profileImg.onload = () => {
+      html2canvas(ticketElement, { backgroundColor: null, useCORS: true }).then(
+        (canvas) => {
+          const link = document.createElement("a");
+          link.download = "ticket.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        }
+      );
+    };
   };
 
   const handleNewTicket = () => {
@@ -72,7 +89,7 @@ const TicketReady = () => {
           <div className="w-[260px] h-[446px] p-[14px] flex flex-col items-center gap-5 rounded-2xl border border-[#24a0b5] bg-[#031E211A] backdrop-blur-[2px] ">
             <div className="text-center w-[175px]">
               <h2 className="font-rage text-[34px] leading-[34px] ">
-                Techember &quot;25
+                Techember Fest &quot;25
               </h2>
               <div className="p-1 flex flex-col text-[10px] leading-[15px] font-step justify-center items-center gap-1">
                 <p>📍 04 Rumens road, Ikoyi, Lagos</p>
@@ -147,7 +164,6 @@ const TicketReady = () => {
             Download Ticket
           </button>
         </section>
-        {/* </section> */}
       </div>
     </div>
   );
