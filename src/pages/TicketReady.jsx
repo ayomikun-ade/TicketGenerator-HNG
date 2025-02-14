@@ -45,18 +45,10 @@ const TicketReady = () => {
   }, []);
 
   const handleDownloadClick = () => {
-    // const ticketElement = document.getElementById("ticket");
-    // html2canvas(ticketElement, { backgroundColor: null }).then((canvas) => {
-    //   const link = document.createElement("a");
-    //   link.download = "ticket.png";
-    //   link.href = canvas.toDataURL("image/png");
-    //   link.click();
-    // });
     const ticketElement = document.getElementById("ticket");
 
-    // Ensure the profile picture is loaded before capturing
     const profileImg = new Image();
-    profileImg.crossOrigin = "anonymous"; // Ensures CORS compatibility
+    profileImg.crossOrigin = "anonymous";
     profileImg.src = profilePictureUrl;
 
     profileImg.onload = () => {
