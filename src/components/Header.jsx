@@ -49,9 +49,14 @@ const Header = () => {
               role: "status",
             })
           }
-          className="bg-white text-[#0A0C11] text-sm md:text-base flex gap-2 px-6 py-4 items-center justify-center rounded-xl border border-[rgb(213,234,0)] border-opacity-10"
+          className="group bg-white text-[#0A0C11] text-sm md:text-base flex gap-2 px-6 py-4 items-center justify-center rounded-xl border border-[#d5ea00] hover:border-[#d9d9d9] border-opacity-10 hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out"
         >
-          MY TICKETS <img src="/right-arrow.svg" alt="" />
+          MY TICKETS
+          <img
+            src="/right-arrow.svg"
+            className="group-hover:-rotate-45 transition duration-300 hover:ease-in-out group-hover:fill-white"
+            alt="right-arrow"
+          />
         </button>
       </div>
     </>

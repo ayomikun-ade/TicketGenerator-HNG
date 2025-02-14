@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import StepThree from "../components/TicketReady/StepThree";
 import { toPng } from "html-to-image";
 import { toast } from "react-toastify";
-import autoprefixer from "autoprefixer";
 
 const TicketReady = () => {
   const [name, setName] = useState("");
@@ -13,6 +12,7 @@ const TicketReady = () => {
   const [ticketType, setTicketType] = useState("Free");
   const [numTickets, setNumTickets] = useState(1);
   const [profilePictureUrl, setProfilePictureUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,6 +47,7 @@ const TicketReady = () => {
   }, []);
 
   const handleDownloadClick = () => {
+    setLoading(true);
     const ticketElement = document.getElementById("ticket");
 
     if (!ticketElement) return;
@@ -57,6 +58,7 @@ const TicketReady = () => {
         link.download = "ticket.png";
         link.href = dataUrl;
         link.click();
+        setLoading(false);
       })
       .catch((error) => {
         toast.error("Error downloading ticket image. Try again.", {
@@ -69,8 +71,8 @@ const TicketReady = () => {
   };
 
   const handleNewTicket = () => {
-    localStorage.clear(); // Clear all stored values
-    navigate("/", { replace: true }); // Navigate to home
+    localStorage.clear();
+    navigate("/", { replace: true });
     window.location.reload();
   };
 
@@ -93,10 +95,6 @@ const TicketReady = () => {
                 <p>📅 March 15, 2025 | 7:00 PM</p>
               </div>
             </div>
-            {/* <div
-              style={{ backgroundImage: `url(${profilePictureUrl})` }}
-              className={`w-[140px] h-[140px] rounded-xl border-4 border-[#24A0B580] bg-center bg-cover`}
-            ></div> */}
             <img
               src={profilePictureUrl}
               alt="profile image"
@@ -156,15 +154,16 @@ const TicketReady = () => {
         <section className="flex flex-col-reverse  mt-6 md:flex-row w-full justify-between gap-6 font-main leading-6">
           <button
             onClick={handleNewTicket}
-            className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white"
+            className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out"
           >
             Book Another Ticket
           </button>
           <button
             onClick={handleDownloadClick}
-            className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+            disabled={loading}
+            className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
           >
-            Download Ticket
+            {loading ? "Please wait..." : "Download Ticket"}
           </button>
         </section>
       </div>

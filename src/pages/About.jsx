@@ -2,17 +2,19 @@ import Header from "../components/Header";
 
 const About = () => {
   return (
-    <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
+    <div className="relative outline-none font-step mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
       <div className="bg-[#041e23] text-white flex flex-col justify- items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <section>
           <article className="">
-            <h1 className="text-3xl font-bold mb-4">
+            <h1 className="text-4xl font-rage mb-4">
               Event Ticket Booking UI – Open Source Practice Project 🎟️
             </h1>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2">Overview</h2>
+              <h2 className="text-2xl font-main font-semibold mb-2">
+                Overview
+              </h2>
               <p className="text-neutral-100 leading-relaxed">
                 This is a beginner-friendly yet practical Event Ticket Booking
                 UI designed for developers to clone, explore, and build upon.
@@ -29,7 +31,9 @@ const About = () => {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2">Flow & Features</h2>
+              <h2 className="text-2xl font-main font-semibold mb-2">
+                Flow & Features
+              </h2>
               <ol className="list-decimal pl-6">
                 <li className="mb-2">
                   <p className="font-semibold">1️⃣ Ticket Selection</p>
@@ -100,7 +104,7 @@ const About = () => {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2">
+              <h2 className="text-2xl font-main font-semibold mb-2">
                 How to Build This 🚀
               </h2>
               <p className="text-neutral-100 leading-relaxed">
@@ -140,7 +144,7 @@ const About = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-1">
+                <h3 className="text-xl font-main font-semibold mb-1">
                   📌 Backend (Optional)
                 </h3>
                 <ul className="list-disc pl-6 text-neutral-100 leading-relaxed">
@@ -160,7 +164,7 @@ const About = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-1">
+                <h3 className="text-xl font-main font-semibold mb-1">
                   📌 Payment Integration
                 </h3>
                 <ul className="list-disc pl-6 text-neutral-100 leading-relaxed">
@@ -180,7 +184,7 @@ const About = () => {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2">
+              <h2 className="text-2xl font-main font-semibold mb-2">
                 What You’ll Learn 🧑‍💻
               </h2>
               <ul className="list-disc pl-6 text-neutral-100 leading-relaxed">
@@ -204,7 +208,7 @@ const About = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-2">
+              <h2 className="text-2xl font-main font-semibold mb-2">
                 Need Help? Reach Out! 💬
               </h2>
               <p className="text-neutral-100 leading-relaxed">
@@ -213,8 +217,8 @@ const About = () => {
             </section>
           </article>
         </section>
-        <section className="flex flex-col-reverse  mt-6 md:flex-row w-full justify-between gap-6 font-main leading-6">
-          <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">
+        <section className="flex flex-col-reverse mt-6 md:flex-row w-full justify-between gap-6 font-main leading-6">
+          <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out">
             <a
               href="https://www.figma.com/community/file/1470800949188681164"
               target="_blank"
@@ -222,7 +226,7 @@ const About = () => {
               Design File
             </a>
           </button>
-          <button className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent">
+          <button className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out">
             <a
               href="https://github.com/ayomikun-ade/TicketGenerator-HNG"
               target="_blank"
@@ -231,7 +235,6 @@ const About = () => {
             </a>
           </button>
         </section>
-        {/* </section> */}
       </div>
     </div>
   );
