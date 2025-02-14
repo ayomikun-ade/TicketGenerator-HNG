@@ -240,6 +240,7 @@ const AttendeeDetails = () => {
                 type="text"
                 name="name"
                 id="name"
+                placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="appearance-none outline-none h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
@@ -258,9 +259,10 @@ const AttendeeDetails = () => {
                   type="email"
                   name="email"
                   id="email"
+                  placeholder="hello@avioflagos.io"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none w-full outline-none bg-transparent focus:caret-[#26899c]"
+                  className="appearance-none w-full placeholder:font-light outline-none bg-transparent focus:caret-[#26899c]"
                 />
               </p>
             </div>
