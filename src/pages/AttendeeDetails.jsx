@@ -172,9 +172,16 @@ const AttendeeDetails = () => {
               >
                 {profilePictureUrl ? (
                   <div
-                    className={`text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 ${
+                    tabIndex={0}
+                    aria-label="Upload profile picture. Drag and drop or click to upload."
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        handleManualUpload();
+                      }
+                    }}
+                    className={`text-base font-normal absolute outline-none right-0 left-0 font-step md:font-main leading-6 w-60 h-60 ${
                       profilePictureUrl ? `overflow-hidden` : `p-6`
-                    } flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50`}
+                    } flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] focus:border-opacity-90 border-4 border-[#24a0b5] border-opacity-50`}
                   >
                     <img
                       src={profilePictureUrl}
@@ -243,7 +250,7 @@ const AttendeeDetails = () => {
                 placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="appearance-none outline-none h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
+                className="appearance-none outline-none h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#24a0b5] caret-[#24a0b5]"
               />
             </div>
             <div className="flex flex-col">
@@ -253,7 +260,7 @@ const AttendeeDetails = () => {
               >
                 Enter your email *
               </label>
-              <p className="has-[:focus]:border-[#26899c] outline-none flex items-center gap-2 h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c]">
+              <p className="has-[:focus]:border-[#26899c] outline-none flex items-center gap-2 h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#24a0b5]">
                 <img src="/envelope.svg" alt="" />
                 <input
                   type="email"
@@ -262,7 +269,7 @@ const AttendeeDetails = () => {
                   placeholder="hello@avioflagos.io"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none w-full placeholder:font-light outline-none bg-transparent focus:caret-[#26899c]"
+                  className="appearance-none w-full placeholder:font-light outline-none bg-transparent focus:caret-[#24a0b5]"
                 />
               </p>
             </div>
@@ -281,7 +288,7 @@ const AttendeeDetails = () => {
                 maxLength={120}
                 value={specialRequest}
                 onChange={(e) => setSpecialRequest(e.target.value)}
-                className="resize-none outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
+                className="resize-none outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#24a0b5] caret-[#26899c]"
               ></textarea>
             </div>
             <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
