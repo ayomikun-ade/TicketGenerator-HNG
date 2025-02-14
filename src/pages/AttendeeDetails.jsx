@@ -8,7 +8,10 @@ import StepTwo from "../components/AttendeeDetails/StepTwo";
 const attendeeSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
-  specialRequest: z.string().optional(),
+  specialRequest: z
+    .string()
+    .max(120, { message: "Special request must be at most 250 characters." })
+    .optional(),
   profilePictureUrl: z
     .string()
     .min(1, { message: "Profile picture is required" }),
@@ -272,10 +275,11 @@ const AttendeeDetails = () => {
                 name="special"
                 id="special"
                 placeholder="Textarea"
-                rows={4}
+                rows={3}
+                maxLength={120}
                 value={specialRequest}
                 onChange={(e) => setSpecialRequest(e.target.value)}
-                className="outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
+                className="resize-none outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#26899c] caret-[#26899c]"
               ></textarea>
             </div>
             <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
