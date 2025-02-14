@@ -167,7 +167,7 @@ const AttendeeDetails = () => {
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <ToastContainer />
       <Header />
-      <div className="bg-[#041e23] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
+      <div className="bg-[#041e23] animate-fadeIn text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <StepTwo />
         <section className="md:bg-[#08252b] w-full flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">
           <div className="bg-[#052228] w-full flex flex-col justify-between gap-8 text-neutral-50 px-6 py-6 pb-12 rounded-3xl md:w-[556px] border-[1px] border-[#07373f]">
@@ -228,7 +228,7 @@ const AttendeeDetails = () => {
                   <button
                     disabled={uploading}
                     onClick={handleManualUpload}
-                    className="bg-[#0e464f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50"
+                    className="bg-[#0e464f] hover:bg-[#0d383f] text-base font-normal absolute right-0 left-0 font-step md:font-main leading-6 w-60 h-60 p-6 flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] border-4 border-[#24a0b5] border-opacity-50 transition duration-300 hover:ease-in-out"
                   >
                     <img src="/cloud-download.svg" alt="" />
                     <p>
@@ -311,14 +311,14 @@ const AttendeeDetails = () => {
             <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
               <Link
                 to="/"
-                className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white"
+                className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out"
               >
                 Back
               </Link>
               <button
                 // type="submit"
                 onClick={handleSaveDetails}
-                className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+                className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
               >
                 Get My Free Ticket
               </button>

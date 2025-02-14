@@ -79,7 +79,7 @@ const TicketReady = () => {
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
-      <div className="bg-[#041e23] text-white flex flex-col justify- items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
+      <div className="bg-[#041e23] animate-fadeIn text-white flex flex-col justify- items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <StepThree />
         <section
           id="ticket"
@@ -163,7 +163,18 @@ const TicketReady = () => {
             disabled={loading}
             className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
           >
-            {loading ? "Please wait..." : "Download Ticket"}
+            {loading ? (
+              <p className="flex justify-center">
+                <img
+                  src="/loading.svg"
+                  alt="loading"
+                  className="animate-spin"
+                />{" "}
+                Please Wait...
+              </p>
+            ) : (
+              "Download Ticket"
+            )}
           </button>
         </section>
       </div>

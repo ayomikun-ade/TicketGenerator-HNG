@@ -24,7 +24,7 @@ const SelectTicket = () => {
   return (
     <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <Header />
-      <div className="md:bg-[#041e23] bg-[#08252B] text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 md:mb-36 mt-36  rounded-[40px] border border-[#0e464f]">
+      <div className="md:bg-[#041e23] bg-[#08252B] animate-fadeIn text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 md:mb-36 mt-36  rounded-[40px] border border-[#0e464f]">
         <StepOne />
         <section className="md:bg-[#08252b] flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">
           <EventDetails />
@@ -35,7 +35,7 @@ const SelectTicket = () => {
             </h3>
             <section className="grid grid-cols-1 w-full md:grid-cols-3 p-4 gap-4 flex-wrap rounded-3xl border-[#07373f] bg-[#052228]">
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] ${
+                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
                   ticketType === "Free" ? "bg-[#12464e]" : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("Free")}
@@ -49,7 +49,7 @@ const SelectTicket = () => {
                 <p className="text-[#d9d9d9] leading-5">20/52</p>
               </button>
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] ${
+                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
                   ticketType === "VIP" ? "bg-[#12464e]" : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("VIP")}
@@ -63,7 +63,7 @@ const SelectTicket = () => {
                 <p className="text-[#d9d9d9] leading-5">20/52</p>
               </button>
               <button
-                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] ${
+                className={`p-3 rounded-xl font-step text-left border-[1px] border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
                   ticketType === "VVIP" ? "bg-[#12464e]" : "bg-transparent"
                 }`}
                 onClick={() => handleTicketTypeChange("VVIP")}
@@ -96,6 +96,7 @@ const SelectTicket = () => {
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
                 <svg
@@ -114,12 +115,12 @@ const SelectTicket = () => {
             </div>
           </div>
           <div className="flex flex-col-reverse md:flex-row w-full justify-between gap-6 font-main leading-6">
-            <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white">
+            <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out">
               Cancel
             </button>
             <button
               onClick={handleNextClick}
-              className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent"
+              className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
             >
               Next
             </button>
