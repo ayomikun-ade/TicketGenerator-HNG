@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router";
-import Header from "../components/Header";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
@@ -166,7 +165,7 @@ const AttendeeDetails = () => {
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
       <ToastContainer />
-      <Header />
+      {/* <Header /> */}
       <div className="bg-[#041e23] animate-fadeIn text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <StepTwo />
         <section className="md:bg-[#08252b] w-full flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">

@@ -9,7 +9,7 @@ const Header = () => {
       : "text-[#B3B3B3] hover:text-neutral-200";
   };
   return (
-    <div className="fixed right-0 left-0 z-10 mx-auto bg-[rgb(5,37,44)] bg-opacity-40 backdrop-blur-[2px] font-main flex justify-between w-[320px] md:w-full max-w-[1200px] py-3 px-4 mt-6 items-center rounded-3xl border border-[#197686]">
+    <div className="fixed right-0 left-0 z-10 animate-headerIn mx-auto bg-[rgb(5,37,44)] bg-opacity-40 backdrop-blur-[2px] font-main flex justify-between w-[320px] md:w-full max-w-[1200px] py-3 px-4 mt-6 items-center rounded-3xl border border-[#197686]">
       <div className="flex gap-2 justify-center items-center">
         <span className="bg-[#052f35] flex py-[6px] px-2 justify-center items-center gap-[10px] rounded-xl border border-[#0e464f]">
           <img src="/ticket.svg" alt="" />

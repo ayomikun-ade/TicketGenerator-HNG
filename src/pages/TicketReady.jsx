@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import StepThree from "../components/TicketReady/StepThree";
 import { toPng } from "html-to-image";
@@ -78,7 +77,7 @@ const TicketReady = () => {
 
   return (
     <div className="relative outline-none font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
-      <Header />
+      {/* <Header /> */}
       <div className="bg-[#041e23] animate-fadeIn text-white flex flex-col justify- items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <StepThree />
         <section

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
 import { Link } from "react-router";
 import NoTicket from "../components/NoTicket";
 import { toast, ToastContainer } from "react-toastify";
@@ -43,7 +42,7 @@ const MyTickets = () => {
     <>
       <ToastContainer />
       <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
-        <Header />
+        {/* <Header /> */}
         <div className="md:bg-[#041e23] bg-[#08252B] animate-fadeIn text-white flex flex-col items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 mt-36  rounded-[40px] border border-[#0e464f]">
           <section className="flex justify-between items-center w-full">
             <h1 className="text-2xl md:text-4xl font-bold">My Tickets 🎟️</h1>
@@ -58,7 +57,7 @@ const MyTickets = () => {
             <section className="w-full flex flex-col items-center">
               <div
                 id="ticket"
-                className="bg-[#052228] p-6 w-full mb-8 rounded-xl shadow-lg border border-[#24a0b5] flex flex-col md:flex-row gap-2 justify-between items-center"
+                className="bg-[#052228] hover:bg-[#0b292e] hover:cursor-pointer transition duration-500 hover:ease-in-out p-6 w-full mb-8 rounded-xl shadow-lg border border-[#24a0b5] flex flex-col md:flex-row gap-2 justify-between items-center"
               >
                 {profilePictureUrl && (
                   <img
@@ -92,7 +91,7 @@ const MyTickets = () => {
               {/* <div className="mt-6 flex flex-col gap-3 w-[350px]"> */}
               <Link
                 to="/"
-                className="text-white bg-[#24a0b5] p-3 text-center rounded-lg border border-[#24a0b5] hover:bg-transparent hover:text-[#24a0b5] transition duration-300 hover:ease-in-out"
+                className="text-white justify-self-end bg-[#24a0b5] p-3 text-center rounded-lg border border-[#24a0b5] hover:bg-transparent hover:text-[#24a0b5] transition duration-300 hover:ease-in-out"
               >
                 Back to Home
               </Link>

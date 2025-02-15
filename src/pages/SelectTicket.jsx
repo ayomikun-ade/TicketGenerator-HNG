@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../components/Header";
 import { useNavigate } from "react-router";
 import StepOne from "../components/SelectTicket/StepOne";
 import EventDetails from "../components/SelectTicket/EventDetails";
@@ -23,7 +22,7 @@ const SelectTicket = () => {
 
   return (
     <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
-      <Header />
+      {/* <Header /> */}
       <div className="md:bg-[#041e23] bg-[#08252B] animate-fadeIn text-white flex flex-col -center items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 md:mb-36 mt-36  rounded-[40px] border border-[#0e464f]">
         <StepOne />
         <section className="md:bg-[#08252b] flex flex-col justify-center items-start gap-8 md:p-6 rounded-[32px] md:border md:border-[#0e464f]">
