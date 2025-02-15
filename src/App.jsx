@@ -3,6 +3,7 @@ import SelectTicket from "./pages/SelectTicket";
 import AttendeeDetails from "./pages/AttendeeDetails";
 import TicketReady from "./pages/TicketReady";
 import About from "./pages/About";
+import MyTickets from "./pages/MyTickets";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/details" element={<AttendeeDetails />} />
           <Route path="/ticket" element={<TicketReady />} />
           <Route path="/about" element={<About />} />
+          <Route path="/my-tickets" element={<MyTickets />} />
         </Routes>
       </BrowserRouter>
     </div>
