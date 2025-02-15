@@ -44,7 +44,7 @@ const MyTickets = () => {
       <ToastContainer />
       <div className="relative font-main mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
         <Header />
-        <div className="md:bg-[#041e23] bg-[#08252B] animate-fadeIn text-white flex flex-col items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mt-36  rounded-[40px] border border-[#0e464f]">
+        <div className="md:bg-[#041e23] bg-[#08252B] animate-fadeIn text-white flex flex-col items-center gap-8 max-w-[700px] w-full p-6 md:p-12 mb-10 mt-36  rounded-[40px] border border-[#0e464f]">
           <section className="flex justify-between items-center w-full">
             <h1 className="text-2xl md:text-4xl font-bold">My Tickets 🎟️</h1>
             <button
