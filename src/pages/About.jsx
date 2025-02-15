@@ -1,10 +1,8 @@
-import Header from "../components/Header";
-
 const About = () => {
   return (
     <div className="relative outline-none font-step mx-5 text-sm md:text-base flex justify-center min-h-screen max-w-[1440px] md:mx-auto md:w-full">
-      <Header />
-      <div className="bg-[#041e23] text-white flex flex-col justify- items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
+      {/* <Header /> */}
+      <div className="bg-[#041e23] text-white flex flex-col animate-fadeIn items-center gap-8 max-w-[700px] w-full py-8 px-6 md:p-12 mb-10 md:mb-36 mt-36 rounded-[24px] border border-[#0e464f]">
         <section>
           <article className="">
             <h1 className="text-4xl font-rage mb-4">
@@ -217,7 +215,7 @@ const About = () => {
             </section>
           </article>
         </section>
-        <section className="flex flex-col-reverse mt-6 md:flex-row w-full justify-between gap-6 font-main leading-6">
+        <section className="flex flex-col-reverse mt-6 md:flex-row w-full py-4 px-12 border border-[#24a0b5] rounded-2xl justify-between gap-6 font-main leading-6">
           <button className="bg-transparent text-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:bg-[#24a0b5] hover:text-white transition duration-300 hover:ease-in-out">
             <a
               href="https://www.figma.com/community/file/1470800949188681164"
