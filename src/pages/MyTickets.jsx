@@ -30,6 +30,17 @@ const MyTickets = () => {
     window.location.reload();
   };
 
+  const handleDeleteTicket = (index) => {
+    const updatedTickets = oldTickets.filter((_, i) => i !== index);
+    setOldTickets(updatedTickets);
+    localStorage.setItem("tickets", JSON.stringify(updatedTickets));
+
+    toast.success("Ticket deleted successfully!", {
+      autoClose: 2000,
+      theme: "dark",
+    });
+  };
+
   return (
     <>
       <ToastContainer />
@@ -78,8 +89,7 @@ const MyTickets = () => {
                   </div>
                   <button
                     onClick={() => {
-                      localStorage.clear();
-                      window.location.reload();
+                      handleDeleteTicket(index);
                     }}
                     className="text-lg text-center text-red-600 hover:text-red-500 font-semibold"
                   >
