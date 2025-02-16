@@ -4,19 +4,37 @@ import StepOne from "../components/SelectTicket/StepOne";
 import EventDetails from "../components/SelectTicket/EventDetails";
 
 const SelectTicket = () => {
-  const [ticketType, setTicketType] = useState("Free");
-  const [numTickets, setNumTickets] = useState(1);
+  const [currentTicket, setCurrentTicket] = useState(() => {
+    return (
+      JSON.parse(localStorage.getItem("currentTicket")) || {
+        ticketType: "Free",
+        numTickets: 1,
+        name: "",
+        email: "",
+        specialRequest: "",
+        profilePictureUrl: "",
+      }
+    );
+  });
 
   const navigate = useNavigate();
 
   const handleTicketTypeChange = (type) => {
-    setTicketType(type);
+    const updatedTicket = { ...currentTicket, ticketType: type };
+    setCurrentTicket(updatedTicket);
+    localStorage.setItem("currentTicket", JSON.stringify(updatedTicket));
+  };
+
+  const handleNumTicketsChange = (e) => {
+    const updatedTicket = {
+      ...currentTicket,
+      numTickets: Number(e.target.value),
+    };
+    setCurrentTicket(updatedTicket);
+    localStorage.setItem("currentTicket", JSON.stringify(updatedTicket));
   };
 
   const handleNextClick = () => {
-    localStorage.setItem("ticketType", ticketType);
-    localStorage.setItem("numTickets", numTickets);
-    console.log(ticketType, numTickets);
     navigate("/details");
   };
 
@@ -35,7 +53,7 @@ const SelectTicket = () => {
             <section className="grid grid-cols-1 w-full md:grid-cols-3 p-4 gap-4 flex-wrap rounded-3xl border-[#07373f] bg-[#052228]">
               <button
                 className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "Free"
+                  currentTicket.ticketType === "Free"
                     ? "bg-[#12464e] border-1"
                     : "bg-transparent"
                 }`}
@@ -51,7 +69,7 @@ const SelectTicket = () => {
               </button>
               <button
                 className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "VIP"
+                  currentTicket.ticketType === "VIP"
                     ? "bg-[#12464e] border-1"
                     : "bg-transparent"
                 }`}
@@ -67,7 +85,7 @@ const SelectTicket = () => {
               </button>
               <button
                 className={`p-3 rounded-xl font-step text-left border-2 border-[#197686] hover:bg-[#2C545B] transition duration-300 hover:ease-in-out ${
-                  ticketType === "VVIP"
+                  currentTicket.ticketType === "VVIP"
                     ? "bg-[#12464e] border-1"
                     : "bg-transparent"
                 }`}
@@ -91,8 +109,8 @@ const SelectTicket = () => {
             <div className="relative font-step text-base">
               <select
                 name="ticket-no"
-                value={numTickets}
-                onChange={(e) => setNumTickets(e.target.value)}
+                value={currentTicket.numTickets}
+                onChange={handleNumTicketsChange}
                 className="custom-arrow p-3 w-full rounded-xl border-[1px] md:bg-[#041e23] bg-[#08252B] appearance-none border-[#07373f] outline-none"
               >
                 <option value="1" className="bg-transparent">

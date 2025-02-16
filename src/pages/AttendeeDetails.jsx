@@ -17,14 +17,25 @@ const attendeeSchema = z.object({
 });
 
 const AttendeeDetails = () => {
-  const [name, setName] = useState(() => localStorage.getItem("name") || "");
-  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
-  const [specialRequest, setSpecialRequest] = useState(
-    () => localStorage.getItem("specialRequest") || ""
-  );
-  const [profilePictureUrl, setProfilePictureUrl] = useState(
-    () => localStorage.getItem("profilePictureUrl") || ""
-  );
+  const [currentTicket, setCurrentTicket] = useState(() => {
+    return (
+      JSON.parse(localStorage.getItem("currentTicket")) || {
+        name: "",
+        email: "",
+        specialRequest: "",
+        profilePictureUrl: "",
+        ticketType: "Free",
+        numTickets: 1,
+      }
+    );
+  });
+
+  useEffect(() => {
+    if (currentTicket) {
+      localStorage.setItem("currentTicket", JSON.stringify(currentTicket));
+    }
+  }, [currentTicket]);
+
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -32,21 +43,9 @@ const AttendeeDetails = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  useEffect(() => {
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("specialRequest", specialRequest);
-    localStorage.setItem("profilePictureUrl", profilePictureUrl);
-  }, [name, email, specialRequest, profilePictureUrl]);
-
   const handleSaveDetails = (e) => {
     e.preventDefault();
-    const result = attendeeSchema.safeParse({
-      name,
-      email,
-      specialRequest,
-      profilePictureUrl,
-    });
+    const result = attendeeSchema.safeParse(currentTicket);
 
     if (!result.success) {
       result.error.issues.forEach((issue) => {
@@ -59,10 +58,10 @@ const AttendeeDetails = () => {
       return;
     }
 
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("specialRequest", specialRequest);
-    localStorage.setItem("profilePictureUrl", profilePictureUrl);
+    const existingTickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
+    const updatedTickets = [...existingTickets, currentTicket];
+    localStorage.setItem("tickets", JSON.stringify(updatedTickets));
 
     toast.success("Details saved successfully!", {
       autoClose: 2000,
@@ -91,7 +90,10 @@ const AttendeeDetails = () => {
 
       const data = await response.json();
       if (data.secure_url) {
-        setProfilePictureUrl(data.secure_url);
+        setCurrentTicket({
+          ...currentTicket,
+          profilePictureUrl: data.secure_url,
+        });
 
         toast.success("Image uploaded successfully!", {
           autoClose: 2000,
@@ -186,7 +188,7 @@ const AttendeeDetails = () => {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                {profilePictureUrl ? (
+                {currentTicket.profilePictureUrl ? (
                   <div
                     tabIndex={0}
                     aria-label="Upload profile picture. Drag and drop or click to upload."
@@ -196,14 +198,18 @@ const AttendeeDetails = () => {
                       }
                     }}
                     className={`text-base font-normal absolute outline-none right-0 left-0 font-step md:font-main leading-6 w-60 h-60 ${
-                      profilePictureUrl ? `overflow-hidden` : `p-6`
+                      currentTicket.profilePictureUrl
+                        ? `overflow-hidden`
+                        : `p-6`
                     } flex flex-col gap-4 mx-auto -my-6 justify-center items-center rounded-[32px] focus:border-opacity-90 border-4 border-[#24a0b5] border-opacity-50`}
                   >
-                    <img
-                      src={profilePictureUrl}
-                      alt="Profile"
-                      className="h-full w-full object-cover rounded-xl"
-                    />
+                    {currentTicket?.profilePictureUrl && (
+                      <img
+                        src={currentTicket.profilePictureUrl}
+                        alt="Profile"
+                        className="h-full w-full object-cover rounded-xl"
+                      />
+                    )}
                     {isHovered && (
                       <button
                         disabled={uploading}
@@ -261,8 +267,10 @@ const AttendeeDetails = () => {
                 name="name"
                 id="name"
                 placeholder="John Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={currentTicket.name}
+                onChange={(e) =>
+                  setCurrentTicket({ ...currentTicket, name: e.target.value })
+                }
                 className="appearance-none outline-none h-12 p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#24a0b5] caret-[#24a0b5]"
               />
             </div>
@@ -280,8 +288,13 @@ const AttendeeDetails = () => {
                   name="email"
                   id="email"
                   placeholder="hello@avioflagos.io"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={currentTicket.email}
+                  onChange={(e) =>
+                    setCurrentTicket({
+                      ...currentTicket,
+                      email: e.target.value,
+                    })
+                  }
                   className="appearance-none w-full placeholder:font-light outline-none bg-transparent focus:caret-[#24a0b5]"
                 />
               </p>
@@ -299,8 +312,13 @@ const AttendeeDetails = () => {
                 placeholder="Textarea"
                 rows={3}
                 maxLength={120}
-                value={specialRequest}
-                onChange={(e) => setSpecialRequest(e.target.value)}
+                value={currentTicket.specialRequest}
+                onChange={(e) =>
+                  setCurrentTicket({
+                    ...currentTicket,
+                    specialRequest: e.target.value,
+                  })
+                }
                 className="resize-none outline-none h-[127px] p-3 rounded-xl border-[1px] border-[#07373f] bg-transparent focus:border-[#24a0b5] caret-[#26899c]"
               ></textarea>
             </div>

@@ -4,19 +4,11 @@ import NoTicket from "../components/NoTicket";
 import { toast, ToastContainer } from "react-toastify";
 
 const MyTickets = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [ticketType, setTicketType] = useState("Free");
-  const [numTickets, setNumTickets] = useState(1);
-  const [profilePictureUrl, setProfilePictureUrl] = useState("");
+  const [oldTickets, setOldTickets] = useState([]);
 
-  // Load ticket details from localStorage
   useEffect(() => {
-    setName(localStorage.getItem("name"));
-    setEmail(localStorage.getItem("email"));
-    setTicketType(localStorage.getItem("ticketType"));
-    setNumTickets(localStorage.getItem("numTickets"));
-    setProfilePictureUrl(localStorage.getItem("profilePictureUrl"));
+    const savedTickets = JSON.parse(localStorage.getItem("tickets"));
+    setOldTickets(savedTickets);
   }, []);
 
   const handleClearAll = () => {
@@ -53,52 +45,58 @@ const MyTickets = () => {
               Clear All
             </button>
           </section>
-          {name ? (
+          {oldTickets === 0 ? (
+            <NoTicket />
+          ) : (
             <section className="w-full flex flex-col items-center">
-              <div
-                id="ticket"
-                className="bg-[#052228] hover:bg-[#0b292e] hover:cursor-pointer transition duration-500 hover:ease-in-out p-6 w-full mb-8 rounded-xl shadow-lg border border-[#24a0b5] flex flex-col md:flex-row gap-2 justify-between items-center"
-              >
-                {profilePictureUrl && (
-                  <img
-                    src={profilePictureUrl}
-                    alt="Profile"
-                    className="w-24 h-24 rounded-xl border-2 border-[#24a0b5] mb-4 md:mb-0"
-                  />
-                )}
-                <div className="text-center md:text-left">
-                  <h2 className="text-xl font-main font-bold">{name}</h2>
-                  <p className="text-gray-300 font-step">{email}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-lg font-semibold">
-                    🎟️ {ticketType} Ticket
-                  </p>
-                  <p className="text-sm font-step text-gray-400">
-                    🎫 {numTickets} Ticket(s)
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    localStorage.clear();
-                    window.location.reload();
-                  }}
-                  className="text-lg text-center text-red-600 hover:text-red-500 font-semibold"
+              {oldTickets.map((ticket, index) => (
+                <div
+                  key={index}
+                  id="ticket"
+                  className="bg-[#052228] hover:bg-[#0b292e] hover:cursor-pointer transition duration-500 hover:ease-in-out p-6 w-full mb-8 rounded-xl shadow-lg border border-[#24a0b5] flex flex-col md:flex-row gap-2 justify-between items-center"
                 >
-                  Delete
-                </button>
-              </div>
+                  {ticket.profilePictureUrl && (
+                    <img
+                      src={ticket.profilePictureUrl}
+                      alt="Profile"
+                      className="w-24 h-24 rounded-xl border-2 border-[#24a0b5] mb-4 md:mb-0"
+                    />
+                  )}
+                  <div className="text-center md:text-left">
+                    <h2 className="text-xl font-main font-bold">
+                      {ticket.name}
+                    </h2>
+                    <p className="text-gray-300 font-step">{ticket.email}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-lg font-semibold">
+                      🎟️ {ticket.ticketType} Ticket
+                    </p>
+                    <p className="text-sm font-step text-gray-400">
+                      🎫 {ticket.numTickets} Ticket(s)
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                    className="text-lg text-center text-red-600 hover:text-red-500 font-semibold"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
               {/* <div className="mt-6 flex flex-col gap-3 w-[350px]"> */}
               <Link
                 to="/"
+                onClick={() => localStorage.removeItem("currentTicket")}
                 className="text-white justify-self-end bg-[#24a0b5] p-3 text-center rounded-lg border border-[#24a0b5] hover:bg-transparent hover:text-[#24a0b5] transition duration-300 hover:ease-in-out"
               >
                 Back to Home
               </Link>
               {/* </div> */}
             </section>
-          ) : (
-            <NoTicket />
           )}
         </div>
       </div>
