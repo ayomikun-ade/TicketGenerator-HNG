@@ -333,7 +333,7 @@ const AttendeeDetails = () => {
                 onClick={handleSaveDetails}
                 className="bg-[#24a0b5] w-full p-3 text-center rounded-lg border-[1px] border-[#24a0b5] hover:text-[#24a0b5] hover:bg-transparent transition duration-300 hover:ease-in-out"
               >
-                Get My Free Ticket
+                Get My {currentTicket.ticketType} Ticket
               </button>
             </div>
           </form>

@@ -78,7 +78,7 @@ const TicketReady = () => {
                     <span className="leading-[15px] opacity-[0.33]">
                       Enter your name
                     </span>{" "}
-                    <span className="text-xs text-opacity-100 font-bold leading-[18px]">
+                    <span className="text-xs text-opacity-100 font-bold leading-[18px] overflow-hidden text-ellipsis">
                       {currentTicket.name}
                     </span>
                   </p>
